@@ -8,7 +8,20 @@ import {
   IoLogoYoutube,
 } from "react-icons/io5";
 
-const Social = ({ source, className }) => {
+type SocialSource = {
+  facebook: string;
+  twitter: string;
+  instagram: string;
+  youtube: string;
+  linkedin: string;
+  pinterest: string;
+  whatsapp: string;
+};
+
+const Social: React.FC<{ source: SocialSource; className: string }> = ({
+  source,
+  className,
+}) => {
   const {
     facebook,
     twitter,

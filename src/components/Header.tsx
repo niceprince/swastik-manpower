@@ -13,10 +13,6 @@ export default function Navbar() {
   const router = useRouter();
   const [sticky, setSticky] = useState<string>("");
 
-  useEffect(() => {
-    window.scrollY = 0;
-  }, []);
-
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     link: string
@@ -45,10 +41,10 @@ export default function Navbar() {
       throttle(function handleScrolls() {
         const scrollY = window.scrollY;
 
-        const stickyVal = scrollY > 2 ? " header-sticky fixed" : "";
+        const stickyVal = scrollY > 2 ? " header-sticky fixed" : "no-sticky";
         setSticky(stickyVal);
         console.log(scrollY);
-      }, 300)
+      }, 200)
     );
   }, [sticky]);
 
