@@ -27,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="apple-mobile-web-app-title" content="Swastik Manpower" />
+      </head>
       <body
         className={`${merriweatherSans.variable} ${geistMono.variable} antialiased`}
       >
