@@ -32,10 +32,10 @@ const AboutContent = () => {
           <div className="row mx-0 rounded-[20px] bg-white px-10 shadow-lg lg:py-10">
             <div className="border-border px-10 py-10 text-center sm:col-6 lg:col-3 lg:border-r lg:py-0">
               <h2>
-                <span className="count">25</span>{" "}
+                <span className="count">20</span>
                 <span className="text-[#A3A1FB]">+</span>
               </h2>
-              <p>Customers</p>
+              <p>Clients</p>
             </div>
             <div className="border-border px-10 py-10 text-center sm:col-6 lg:col-3 lg:border-r lg:py-0">
               <h2>
@@ -46,14 +46,14 @@ const AboutContent = () => {
             </div>
             <div className="border-border px-10 py-10 text-center sm:col-6 lg:col-3 lg:border-r lg:py-0">
               <h2>
-                <span className="count">50</span>{" "}
+                <span className="count">10</span>
                 <span className="text-primary">+</span>
               </h2>
               <p>Cities</p>
             </div>
             <div className="px-10 py-10 text-center sm:col-6 lg:col-3 lg:py-0">
               <h2>
-                <span className="count">5</span>{" "}
+                <span className="count">3</span>
                 <span className="text-[#FEC163]">+</span>
               </h2>
               <p>States</p>

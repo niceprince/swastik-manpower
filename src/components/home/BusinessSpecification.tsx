@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const BusinessSpecification = () => {
@@ -8,7 +9,7 @@ const BusinessSpecification = () => {
           <div className="row">
             <div className="mx-auto text-center lg:col-8">
               <h2>
-                The six core <br /> BUSINESS SPECIFICATION
+                The six core of <br /> BUSINESS SPECIFICATION
               </h2>
               <p className="mt-4">
                 We comply with all statutory obligations and are duly registered
@@ -18,7 +19,7 @@ const BusinessSpecification = () => {
           </div>
           <div className="row mt-14 text-center">
             <div className="mb-10 sm:col-6 lg:col-4">
-              <img
+              <Image
                 className="mx-auto"
                 src="/images/security.svg"
                 width="100"
@@ -33,7 +34,7 @@ const BusinessSpecification = () => {
               </p>
             </div>
             <div className="mb-10 sm:col-6 lg:col-4">
-              <img
+              <Image
                 className="mx-auto"
                 src="/images/security.svg"
                 width="100"
@@ -47,7 +48,7 @@ const BusinessSpecification = () => {
               </p>
             </div>
             <div className="mb-10 sm:col-6 lg:col-4">
-              <img
+              <Image
                 className="mx-auto"
                 src="/images/security.svg"
                 width="100"
@@ -61,7 +62,7 @@ const BusinessSpecification = () => {
               </p>
             </div>
             <div className="mb-10 sm:col-6 lg:col-4">
-              <img
+              <Image
                 className="mx-auto"
                 src="/images/security.svg"
                 width="100"
@@ -76,7 +77,7 @@ const BusinessSpecification = () => {
               </p>
             </div>
             <div className="mb-10 sm:col-6 lg:col-4">
-              <img
+              <Image
                 className="mx-auto"
                 src="/images/security.svg"
                 width="100"
@@ -91,7 +92,7 @@ const BusinessSpecification = () => {
               </p>
             </div>
             <div className="mb-10 sm:col-6 lg:col-4">
-              <img
+              <Image
                 className="mx-auto"
                 src="/images/security.svg"
                 width="100"

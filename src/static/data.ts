@@ -8,6 +8,12 @@ export const menuData = [
   { name: "Privacy Policy", url: "/privacy-policy", header: false },
 ];
 
+export const carouselData = [
+  { src: "/images/img1.jpg", textAlign: "right-0" },
+  { src: "/images/img2.jpg", textAlign: "left-0" },
+  { src: "/images/img3.jpg", textAlign: "left-0" },
+];
+
 export const servicesData = [
   {
     title: "Security Guard (Armed/Unarmed)",

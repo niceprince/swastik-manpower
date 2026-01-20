@@ -5,22 +5,12 @@ import OurStrength from "@/components/home/OurStrength";
 import BusinessSpecification from "@/components/home/BusinessSpecification";
 import Vision from "@/components/home/Vision";
 import Training from "@/components/home/Training";
+import { carouselData } from "@/static/data";
 
 export default function Home() {
   return (
     <>
-      <Carousel
-        images={[
-          "/images/img1.jpg",
-          "/images/img2.jpg",
-          "/images/img3.jpg",
-
-          // "/images/image2.jpg",
-          // "/images/image1.jpg",
-
-          // "/images/image3.jpg",
-        ]}
-      />
+      <Carousel images={carouselData} />
       <HeroSection />
       <Features />
       <Vision />

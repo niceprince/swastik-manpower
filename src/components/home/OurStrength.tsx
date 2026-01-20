@@ -12,7 +12,7 @@ const OurStrength = () => {
               </div>
               <div className="mt-8 lg:col-8 lg:mt-0">
                 <p className="text-white">
-                  Swastik Security &Manpower Services is managed by senior
+                  Swastik Security & Manpower Services is managed by senior
                   experienced officers. We have team of experts specialized in
                   security services. We also have 24*7 functional support
                   maintained by top grade security management personal to

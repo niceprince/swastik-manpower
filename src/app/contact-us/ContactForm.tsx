@@ -1,7 +1,125 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import styles from "./ContactForm.module.css";
 
+type FormData = {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+};
+
+type Errors = Partial<Record<keyof FormData, string>>;
+
+const SendingMail = () => {
+  return (
+    <button
+      type="button"
+      className="inline-flex cursor-not-allowed items-center rounded-md bg-indigo-500 px-4 py-2 text-sm leading-6 font-semibold text-white transition duration-150 ease-in-out hover:bg-indigo-400"
+      disabled
+    >
+      <svg
+        className="mr-3 -ml-1 size-5 animate-spin text-white"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        ></path>
+      </svg>
+      Processing…
+    </button>
+  );
+};
+
+const initialState: FormData = {
+  name: "",
+  email: "",
+  phone: "",
+  subject: "",
+  message: "",
+};
 const ContactForm = () => {
+  const [mailSending, setMailSending] = useState(false);
+  const [responseMsg, setResponseMsg] = useState("");
+  const [formData, setFormData] = useState<FormData>(initialState);
+  const [errors, setErrors] = useState<Errors>({});
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData((prev) => {
+      const { name, value } = event.target;
+      const targetVal = value.trim();
+      return { ...prev, [name]: targetVal };
+    });
+  };
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+
+    (Object.keys(formData) as Array<keyof typeof formData>).forEach((key) => {
+      if (!formData[key]) {
+        newErrors[key] = "This field is required!";
+      }
+    });
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (validate()) {
+      console.log("able to submit");
+      setFormData(initialState);
+      // try {
+      //   const response = await fetch(
+      //     "https://ripplesofhope.in/assets/smp-cquery.php",
+      //     {
+      //       method: "POST",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //       body: JSON.stringify(formData), // sending data
+      //     },
+      //   );
+
+      //   const data = await response.json();
+      //   console.log("✅ Success:", data.status, data.status === "success");
+      //   if (data.status === "success") {
+      //     setMailSending(false);
+      //     setFormData(initialState);
+      //     setResponseMsg("Mail send successfully...");
+      //   } else {
+      //     setMailSending(false);
+      //     setResponseMsg("Something went wrong...");
+      //   }
+      // } catch (error) {
+      //   setMailSending(false);
+      //   setResponseMsg("There is some erorr to sending the mail, try again...");
+      //   console.log("❌ Error:", error);
+      // }
+    } else {
+      console.log(errors);
+    }
+  };
+
   return (
     <div className={styles.contactPage}>
       <section className={styles.contactPageSection}>
@@ -11,16 +129,10 @@ const ContactForm = () => {
           </div>
           <div className={styles.innerContainer}>
             <div className="row clearfix">
-              {/* Form Column */}
               <div className={`sm:col-6 lg:col-8 ${styles.formColumn}`}>
                 <div className={styles.formInnerColumn}>
-                  {/* Contact Form */}
                   <div className={styles.contactForm}>
-                    <form
-                      method="post"
-                      action="sendemail.php"
-                      id="contact-form"
-                    >
+                    <form onSubmit={handleSubmit} id="contact-form">
                       <div className="row clearfix">
                         <div
                           className={`col-md-6 col-sm-6 co-xs-12 ${styles.formGroup}`}
@@ -29,8 +141,12 @@ const ContactForm = () => {
                             type="text"
                             name="name"
                             placeholder="Name"
+                            onChange={handleChange}
                             required
                           />
+                          {errors.name && (
+                            <div className="text-red-600">{errors.name}</div>
+                          )}
                         </div>
                         <div
                           className={`col-md-6 col-sm-6 co-xs-12 ${styles.formGroup}`}
@@ -39,8 +155,27 @@ const ContactForm = () => {
                             type="email"
                             name="email"
                             placeholder="Email"
+                            onChange={handleChange}
                             required
                           />
+                          {errors.email && (
+                            <div className="text-red-600">{errors.email}</div>
+                          )}
+                        </div>
+
+                        <div
+                          className={`col-md-6 col-sm-6 co-xs-12 ${styles.formGroup}`}
+                        >
+                          <input
+                            type="text"
+                            name="phone"
+                            placeholder="Phone"
+                            onChange={handleChange}
+                            required
+                          />
+                          {errors?.phone && (
+                            <div className="text-red-600">{errors.phone}</div>
+                          )}
                         </div>
                         <div
                           className={`col-md-6 col-sm-6 co-xs-12 ${styles.formGroup}`}
@@ -49,38 +184,49 @@ const ContactForm = () => {
                             type="text"
                             name="subject"
                             placeholder="Subject"
+                            onChange={handleChange}
                             required
                           />
-                        </div>
-                        <div
-                          className={`col-md-6 col-sm-6 co-xs-12 ${styles.formGroup}`}
-                        >
-                          <input
-                            type="text"
-                            name="phone"
-                            placeholder="Phone"
-                            required
-                          />
+                          {errors.subject && (
+                            <div className="text-red-600">{errors.subject}</div>
+                          )}
                         </div>
                         <div
                           className={`col-md-12 col-sm-12 co-xs-12 ${styles.formGroup}`}
                         >
-                          <textarea name="message" placeholder="Message" />
+                          <textarea
+                            name="message"
+                            placeholder="Message"
+                            onChange={handleChange}
+                          />
+                          {errors?.message && (
+                            <div className="text-red-600">{errors.message}</div>
+                          )}
                         </div>
                         <div
                           className={`col-md-12 col-sm-12 co-xs-12 ${styles.formGroup}`}
                         >
-                          <button type="submit" className={styles.themeBtn}>
-                            Send Now
-                          </button>
+                          {/* Submit */}
+                          <div className="w-full px-2">
+                            {mailSending ? (
+                              <SendingMail />
+                            ) : (
+                              <button type="submit" className={styles.themeBtn}>
+                                Send Now
+                              </button>
+                            )}
+                            {responseMsg && (
+                              <p className="mt-2 text-green-500">
+                                {responseMsg}
+                              </p>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </form>
                   </div>
-                  {/* End Contact Form */}
                 </div>
               </div>
-              {/* Info Column */}
               <div className={`sm:col-6 lg:col-4 ${styles.infoColumn}`}>
                 <div className={styles.infoInnerColumn}>
                   <h2>
@@ -141,8 +287,7 @@ const ContactForm = () => {
                         </g>
                       </svg>
                       <strong>Email ID:</strong>
-                      <br /> swastikmanpower1@gmail.com <br />
-                      suresh8527360876@gmail.com
+                      <br /> swastikmanpower1@gmail.com
                     </li>
                     <li>
                       <svg
@@ -210,37 +355,11 @@ const ContactForm = () => {
                       </svg>
                       <strong>Company Website:</strong>
                       <br />
-                      www.swastikmanpower.com
+                      <a href="www.swastikmanpower.com">
+                        www.swastikmanpower.com
+                      </a>
                     </li>
                   </ul>
-                  {/* <ul className={styles.socialIconFour}>
-                    <li className={styles.follow}>Follow on: </li>
-                    <li>
-                      <a href="#">
-                        <i className="fab fa-facebook-f" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fab fa-twitter" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fab fa-google-plus-g" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fab fa-dribbble" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fab fa-pinterest-p" />
-                      </a>
-                    </li>
-                  </ul> */}
                 </div>
               </div>
             </div>
